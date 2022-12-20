@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 import { useNavigate } from "react-router-dom";
+import { TrashOutline } from "react-ionicons";
 
 
 
@@ -73,6 +74,25 @@ export default function Habitos() {
         promise2.then((res) => { setHabitos(res.data) })
     }
 
+    function excluirHabito(e) {
+        const pai = (e.target.parentElement);
+        const urlExcluir = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${pai.parentElement.id}`
+        console.log(urlExcluir);
+        const promise = axios.delete(urlExcluir, {
+            headers: {
+                'Authorization': `Bearer ${info.token}`
+            }
+        });
+        promise.then((res) => { setHabitos(res.data) });
+        const promise2 = axios.get(urlHabito, {
+            headers: {
+                'Authorization': `Bearer ${info.token}`
+            }
+        });
+        promise2.then((res) => { setHabitos(res.data) })
+    }
+
+
     useEffect(() => {
         const promise = axios.get(urlHabito, {
             headers: {
@@ -123,7 +143,7 @@ export default function Habitos() {
                     <Footer>
                         <h1>Hábitos</h1>
                         <h2>Histórico</h2>
-                        <div> <CircularProgressbar
+                        <div onClick={()=>{navigate("/hoje")}}> <CircularProgressbar
                             value={80}
                             text="Hoje"
                             background
@@ -172,26 +192,29 @@ export default function Habitos() {
                         <Salvar onClick={criarHabito}>Salvar</Salvar>
                     </CriandoHabito>
 
-                    {habitos.map((habito, index) => {
-                        return (<CardHabito key={index}>
-                            <h1>{habito.name}</h1>
 
-                            <Posicionar>
-                                {semana.map((dia, index) => {
-                                    if (habito.days.includes(index)) {
-                                        return (<Dia cor1="#DBDBDB" cor2="#FFFFFF" key={index} id={index}>{dia}</Dia>)
-                                    }
-                                    return (<Dia cor1="#FFFFFF" cor2="#DBDBDB" key={index} id={index}>{dia}</Dia>)
-                                })}
-                            </Posicionar>
-                        </CardHabito>)
+                    {habitos.map((habito, index) => {
+                        return (
+                            <CardHabito key={index} >
+
+                                <h1>{habito.name} <p id={habito.id} onClick={excluirHabito}><TrashOutline width="13px" height="15px" /></p></h1>
+
+                                <Posicionar>
+                                    {semana.map((dia, index) => {
+                                        if (habito.days.includes(index)) {
+                                            return (<Dia cor1="#DBDBDB" cor2="#FFFFFF" key={index} id={index}>{dia}</Dia>)
+                                        }
+                                        return (<Dia cor1="#FFFFFF" cor2="#DBDBDB" key={index} id={index}>{dia}</Dia>)
+                                    })}
+                                </Posicionar>
+                            </CardHabito>)
                     })}
 
                 </Conteudo>
                 <Footer>
                     <h1>Hábitos</h1>
                     <h2>Histórico</h2>
-                    <div> <CircularProgressbar
+                    <div onClick={()=>{navigate("/hoje")}}> <CircularProgressbar
                         value={80}
                         text="Hoje"
                         background
@@ -211,6 +234,14 @@ export default function Habitos() {
         </>
     )
 }
+
+const Lixo = styled.div`
+position:absolute;
+top:11px;
+left:317px;
+height:15px;
+width:13px;
+`
 
 const Posicionar = styled.div`
 margin-top:10px;
@@ -236,6 +267,15 @@ line-height: 25px;
 color: #666666;
 h1{
     all:unset;
+    width:305px;
+    display:flex;
+    justify-content:space-between;
+
+    p{
+        all:unset;
+        height:15px;
+        width:13px;
+    }
 }
 `
 
