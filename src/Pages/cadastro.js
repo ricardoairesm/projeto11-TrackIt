@@ -51,16 +51,16 @@ export default function Cadastro() {
                     </Logo>
 
                     <form id="formCadastro">
-                        <InputEmail type="email" name="email" onChange={handleForm} />
-                        <InputSenha type="password" name="password" onChange={handleForm} />
-                        <InputNome type="text" name="name" onChange={handleForm} />
-                        <InputFoto type="url" name="image" onChange={handleForm} />
+                        <InputEmail  data-test="email-input"  type="email" name="email" onChange={handleForm} />
+                        <InputSenha  data-test="password-input"  type="password" name="password" onChange={handleForm} />
+                        <InputNome   data-test="user-name-input" type="text" name="name" onChange={handleForm} />
+                        <InputFoto   data-test="user-image-input"  type="url" name="image" onChange={handleForm} />
                     </form>
 
-                    <BotaoCadastrar onClick={cadastrar}>Cadastrar</BotaoCadastrar>
+                    <BotaoCadastrar data-test="signup-btn" onClick={cadastrar}>Cadastrar</BotaoCadastrar>
 
                     <Link to="/">
-                        <IrLogin>Já tem uma conta? Faça login!</IrLogin>
+                        <IrLogin data-test="login-link">Já tem uma conta? Faça login!</IrLogin>
                     </Link>
 
                 </Corpo>

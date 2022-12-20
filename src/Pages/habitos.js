@@ -117,26 +117,26 @@ export default function Habitos() {
                         <img src={info.image} />
                     </Header>
                     <H1><h1>Meus Hábitos</h1>
-                        <p onClick={() => { setStatus("column") }}>+</p>
+                        <p data-test="habit-create-btn" onClick={() => { setStatus("column") }}>+</p>
                     </H1>
                     <Conteudo>
-                        <CriandoHabito display={status}>
-                            <InputHabito onChange={handleInput} />
+                        <CriandoHabito data-test="habit-create-container" display={status}>
+                            <InputHabito data-test="habit-name-input" onChange={handleInput} />
                             <Dias>
                                 {semana.map((dia, index) => {
                                     if (infoHabito.days.includes(`${index}`)) {
                                         return (
-                                            <Dia onClick={removerDia} cor1="#DBDBDB" cor2="#FFFFFF" key={index} id={index}>{dia}</Dia>
+                                            <Dia  data-test="habit-day" onClick={removerDia} cor1="#DBDBDB" cor2="#FFFFFF" key={index} id={index}>{dia}</Dia>
                                         )
                                     }
                                     return (
-                                        <Dia onClick={escolherDia} cor1="#FFFFFF" cor2="#DBDBDB" key={index} id={index}>{dia}</Dia>
+                                        <Dia  data-test="habit-day" onClick={escolherDia} cor1="#FFFFFF" cor2="#DBDBDB" key={index} id={index}>{dia}</Dia>
                                     )
                                 }
                                 )}
                             </Dias>
-                            <Cancelar onClick={() => { setStatus("none") }}>Cancelar</Cancelar>
-                            <Salvar onClick={criarHabito}>Salvar</Salvar>
+                            <Cancelar data-test="habit-create-cancel-btn" onClick={() => { setStatus("none") }}>Cancelar</Cancelar>
+                            <Salvar  data-test="habit-create-save-btn" onClick={criarHabito}>Salvar</Salvar>
                         </CriandoHabito>
                         <H2>Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para começar a trackear!</H2>
                     </Conteudo>
@@ -170,41 +170,41 @@ export default function Habitos() {
                     <img src={info.image} />
                 </Header>
                 <H1>Meus Hábitos
-                    <p onClick={() => { setStatus("column") }}>+</p>
+                    <p data-test="habit-create-btn" onClick={() => { setStatus("column") }}>+</p>
                 </H1>
                 <Conteudo>
-                    <CriandoHabito display={status}>
-                        <InputHabito onChange={handleInput} />
+                    <CriandoHabito data-test="habit-create-container" display={status}>
+                        <InputHabito data-test="habit-name-input" onChange={handleInput} />
                         <Dias>
                             {semana.map((dia, index) => {
                                 if (infoHabito.days.includes(`${index}`)) {
                                     return (
-                                        <Dia onClick={removerDia} cor1="#DBDBDB" cor2="#FFFFFF" key={index} id={index}>{dia}</Dia>
+                                        <Dia data-test="habit-day" onClick={removerDia} cor1="#DBDBDB" cor2="#FFFFFF" key={index} id={index}>{dia}</Dia>
                                     )
                                 }
                                 return (
-                                    <Dia onClick={escolherDia} cor1="#FFFFFF" cor2="#DBDBDB" key={index} id={index}>{dia}</Dia>
+                                    <Dia data-test="habit-day" onClick={escolherDia} cor1="#FFFFFF" cor2="#DBDBDB" key={index} id={index}>{dia}</Dia>
                                 )
                             }
                             )}
                         </Dias>
-                        <Cancelar onClick={() => { setStatus("none"); setInfoHabito({ ...infoHabito, days: [] }) }}>Cancelar</Cancelar>
-                        <Salvar onClick={criarHabito}>Salvar</Salvar>
+                        <Cancelar data-test="habit-create-cancel-btn" onClick={() => { setStatus("none"); setInfoHabito({ ...infoHabito, days: [] }) }}>Cancelar</Cancelar>
+                        <Salvar data-test="habit-create-save-btn" onClick={criarHabito}>Salvar</Salvar>
                     </CriandoHabito>
 
 
                     {habitos.map((habito, index) => {
                         return (
-                            <CardHabito key={index} >
+                            <CardHabito data-test="habit-container" key={index} >
 
-                                <h1>{habito.name} <p id={habito.id} onClick={excluirHabito}><TrashOutline width="13px" height="15px" /></p></h1>
+                                <h1 data-test="habit-name">{habito.name} <p data-test="habit-delete-btn" id={habito.id} onClick={excluirHabito}><TrashOutline width="13px" height="15px" /></p></h1>
 
                                 <Posicionar>
                                     {semana.map((dia, index) => {
                                         if (habito.days.includes(index)) {
-                                            return (<Dia cor1="#DBDBDB" cor2="#FFFFFF" key={index} id={index}>{dia}</Dia>)
+                                            return (<Dia data-test="habit-day" cor1="#DBDBDB" cor2="#FFFFFF" key={index} id={index}>{dia}</Dia>)
                                         }
-                                        return (<Dia cor1="#FFFFFF" cor2="#DBDBDB" key={index} id={index}>{dia}</Dia>)
+                                        return (<Dia data-test="habit-day" cor1="#FFFFFF" cor2="#DBDBDB" key={index} id={index}>{dia}</Dia>)
                                     })}
                                 </Posicionar>
                             </CardHabito>)

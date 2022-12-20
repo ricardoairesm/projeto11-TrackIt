@@ -59,13 +59,13 @@ export default function Login() {
                         <img src={logo}></img>
                     </Logo>
 
-                    <InputEmail name="email" onChange={handleLogin} />
-                    <InputSenha type="password" name="password" onChange={handleLogin} />
-                    <BotaoEntrar onClick={fazerLogin}>Entrar</BotaoEntrar>
+                    <InputEmail data-test="email-input" name="email" onChange={handleLogin} />
+                    <InputSenha data-test="password-input" type="password" name="password" onChange={handleLogin} />
+                    <BotaoEntrar data-test="login-btn" onClick={fazerLogin}>Entrar</BotaoEntrar>
 
 
                     <Link to="/cadastro">
-                        <IrCadastro>Não tem uma conta? Cadastre-se!</IrCadastro>
+                        <IrCadastro data-test="signup-link">Não tem uma conta? Cadastre-se!</IrCadastro>
                     </Link>
 
                 </Corpo>
